@@ -1,0 +1,17 @@
+import bs4
+import requests
+
+# creating the request
+res=requests.get("https://realpython.github.io/fake-jobs/")
+print(type(res))
+
+# Convert the request object to the Beautiful Soup Object  
+soup=bs4.BeautifulSoup(res.content,'html.parser')
+
+content=soup.find("div",class_="card-content")
+in_content=content.contents
+for i in in_content:
+        company=i.find("h3",class_="subtitle is-6 company")
+        title=i.find("h2",class_="title is-5")
+        print(company)
+        print(title)
